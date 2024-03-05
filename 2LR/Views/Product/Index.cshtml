@@ -1,0 +1,17 @@
+﻿@model List<Product>
+
+<h2>Продукты</h2>
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var product in Model)
+        {
+            <li>@product.Name - rub @product.Price - @product.Weight kg</li>
+        }
+    </ul>
+}
+
+<form asp-controller="Product" asp-action="Clear" method="post">
+    <button type="submit">Очистить</button>
+</form>
