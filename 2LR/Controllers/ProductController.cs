@@ -1,4 +1,5 @@
-﻿using _2LR.Models;
+﻿using _2LR.Data;
+using _2LR.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,16 @@ namespace _2LR.Controllers
 {
     public class ProductController : Controller
     {
-        private static List<Product> _products = new List<Product>();
+        private readonly AppDbContext dbContext;
+
+        public ProductController(AppDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
 
         public IActionResult Index()
         {
-            return View(_products);
+            return View(dbContext.Products.ToList());
         }
 
         public IActionResult Add()
@@ -24,7 +30,8 @@ namespace _2LR.Controllers
         {
             if (ModelState.IsValid)
             {
-                _products.Add(product);
+                dbContext.Add(product);
+                dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -33,7 +40,8 @@ namespace _2LR.Controllers
         [HttpPost]
         public IActionResult Clear()
         {
-            _products.Clear();
+            dbContext.RemoveRange(dbContext.Products.ToList());
+            dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
     }
