@@ -1,13 +1,13 @@
 ﻿@model List<Product>
 
-<h2>Продукты</h2>
+<h2>Ноутбуки</h2>
 
 @if (Model.Any())
 {
     <ul>
         @foreach (var product in Model)
         {
-            <li>@product.Name - rub @product.Price - @product.Weight kg</li>
+            <li>@product.Brend - @product.ItemModel - @product.Price RUB</li>
         }
     </ul>
 }
