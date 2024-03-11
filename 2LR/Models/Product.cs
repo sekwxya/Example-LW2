@@ -7,7 +7,7 @@ namespace _2LR.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Введите имя")]
-        public string ?Name { get; set; }
+        public string? Name { get; set; }
 
         [Required(ErrorMessage = "Введите цену")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Введите положительное число")]
