@@ -19,5 +19,4 @@ namespace _2LR.Models
         public double? Price { get; set; }
 
     }
-
 }

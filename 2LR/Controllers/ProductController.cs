@@ -1,8 +1,10 @@
 ﻿using _2LR.Data;
 using _2LR.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace _2LR.Controllers
 {
@@ -15,9 +17,13 @@ namespace _2LR.Controllers
             this.dbContext = dbContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(dbContext.Products.ToList());
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync("http://localhost:5203/product");
+            var jsonString = await response.Content.ReadAsStringAsync();
+            var ProductsList = JsonConvert.DeserializeObject<List<Product>>(jsonString);
+            return View(ProductsList);
         }
 
         public IActionResult Add()
