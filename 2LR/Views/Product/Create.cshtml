@@ -1,23 +1,23 @@
 ﻿@model Product
 
-<h2>Добавить</h2>
+<h2>Добавление ноутбука</h2>
 
-<form asp-controller="Product" asp-action="Add" method="post">
-    <div>
-        <label>Бренд:</label>
+<form asp-controller="Product" asp-action="Create" method="post">
+    <p>
+        <label>Бренд:</label><br />
         <input type="text" asp-for="Brend">
         <span asp-validation-for="Brend" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Модель:</label>
+    </p>
+    <p>
+        <label>Модель:</label><br />
         <input type="text" asp-for="ItemModel">
         <span asp-validation-for="ItemModel" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Цена:</label>
+    </p>
+    <p>
+        <label>Цена:</label><br />
         <input type="text" asp-for="Price">
         <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
+    </p>
+
     <button type="submit">Добавить</button>
 </form>
-    

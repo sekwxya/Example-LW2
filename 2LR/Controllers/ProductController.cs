@@ -1,6 +1,7 @@
 ﻿using _2LR.Data;
 using _2LR.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,13 +21,13 @@ namespace _2LR.Controllers
             return View(dbContext.Products.ToList());
         }
 
-        public IActionResult Add()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
+        public IActionResult Create(Product product)
         {
             if (ModelState.IsValid)
             {
@@ -43,6 +44,19 @@ namespace _2LR.Controllers
             dbContext.RemoveRange(dbContext.Products.ToList());
             dbContext.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int? id) 
+        {
+            if (id != null)
+            {
+                var product = new Product { Id = id.Value };
+                dbContext.Entry(product).State = EntityState.Deleted;
+                await dbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return NotFound();
         }
     }
 
