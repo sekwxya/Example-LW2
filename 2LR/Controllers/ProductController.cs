@@ -26,6 +26,11 @@ namespace _2LR.Controllers
             return View();
         }
 
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Create(Product product)
         {
@@ -59,5 +64,4 @@ namespace _2LR.Controllers
             return NotFound();
         }
     }
-
 }
