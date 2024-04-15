@@ -58,6 +58,23 @@ namespace _2LR.Controllers
             }
             return NotFound();
         }
-    }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id != null)
+            {
+                Product? product = await dbContext.Products.FirstOrDefaultAsync(p=>p.Id == id);
+                if (product != null) return View(product);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Product product)
+        {
+            dbContext.Products.Update(product);
+            await dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+    }
 }
