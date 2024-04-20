@@ -14,7 +14,12 @@
                 <td>@product.ItemModel</td>
                 <td>@product.Price RUB</td>
                 <td>
-                    <a asp-action="Edit" asp-controller="Product" asp-route-id="@product.Id">Изменить</a>
+                    <form asp-controller="Product" asp-action="Read" method="get" asp-route-id="@product.Id">
+                        <input type="submit" value="Об устройстве" />
+                    </form>
+                </td>
+                <td>
+                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id">Изменить</a>
                 </td>
                 <td>
                     <form asp-controller="Product" asp-action="Delete" method="post" asp-route-id="@product.Id">

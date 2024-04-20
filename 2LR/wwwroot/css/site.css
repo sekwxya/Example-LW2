@@ -17,6 +17,12 @@ html {
   min-height: 100%;
 }
 
+input[readonly] {
+    background-color: #f4f4f4; /* Серый цвет фона */
+    border: none; /* Убираем границы */
+    outline: none; /* Убираем обводку */
+}
+
 body {
   margin-bottom: 60px;
 }
