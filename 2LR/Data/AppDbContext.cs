@@ -13,6 +13,5 @@ namespace _2LR.Data
 
         }
         public DbSet<Product> Products { get; set; }
-
     }
 }
