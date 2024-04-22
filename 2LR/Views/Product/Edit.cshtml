@@ -1,35 +1,20 @@
 ﻿@model Product
 
-<h2>Изменение элемента</h2>
-
-<form method="post" asp-action="Edit" class="mt-4">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-secondary text-white">
-                        <h3 class="mb-0">Изменение продукта</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="Brend">Бренд</label>
-                            <input type="text" id="Brend" name="Brend" class="form-control" asp-for="Brend" />
-                            <span asp-validation-for="Brend" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="ItemModel">Модель</label>
-                            <input type="text" id="ItemModel" name="ItemModel" class="form-control" asp-for="ItemModel" />
-                            <span asp-validation-for="ItemModel" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="Price">Цена</label>
-                            <input type="text" id="Price" name="Price" class="form-control" asp-for="Price" />
-                            <span asp-validation-for="Price" class="text-danger"></span>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Редактировать</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<h2>Редактирование ноутбука</h2>
+<form asp-action="edit" asp-controller="Product" asp-route-id="@Model.Id">
+    <p>
+        <label asp-for="Brend">Бренд</label><br />
+        <input type="text" asp-for="Brend" />
+    </p>
+    <p>
+        <label asp-for="ItemModel">Модель</label><br />
+        <input type="text" asp-for="ItemModel" />
+    </p>
+    <p>
+        <label asp-for="Price">Цена</label><br />
+        <input type="number" asp-for="Price" />
+    </p>
+    <p>
+        <input type="submit" value="Сохранить" />
+    </p>
 </form>

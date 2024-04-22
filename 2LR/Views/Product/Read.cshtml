@@ -1,0 +1,17 @@
+﻿@model Product
+
+<h2>Об устройстве</h2>
+<form asp-action="Read" asp-controller="Product" asp-route-id="@Model.Id">
+    <p>
+        <label asp-for="Brend">Бренд</label><br />
+        <input type="text" asp-for="Brend" readonly />
+    </p>
+    <p>
+        <label asp-for="ItemModel">Модель</label><br />
+        <input type="text" asp-for="ItemModel" readonly />
+    </p>
+    <p>
+        <label asp-for="Price">Цена</label><br />
+        <input type="text" asp-for="Price" readonly />
+    </p>
+</form>
