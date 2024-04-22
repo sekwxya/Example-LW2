@@ -1,5 +1,6 @@
 ﻿using _2LR.Data;
 using _2LR.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -9,18 +10,19 @@ namespace _2LR.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly AppDbContext dbContext;
+        private readonly AppDbContext _db;
 
-        public ProductController(AppDbContext dbContext)
+        public ProductController(AppDbContext db)
         {
-            this.dbContext = dbContext;
+            _db = db;
         }
 
         public IActionResult Index()
         {
-            return View(dbContext.Products.ToList());
+            return View(_db.Products.ToList());
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -31,8 +33,8 @@ namespace _2LR.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbContext.Add(product);
-                dbContext.SaveChanges();
+                _db.Add(product);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -41,8 +43,8 @@ namespace _2LR.Controllers
         [HttpPost]
         public IActionResult Clear()
         {
-            dbContext.RemoveRange(dbContext.Products.ToList());
-            dbContext.SaveChanges();
+            _db.RemoveRange(_db.Products.ToList());
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -52,18 +54,19 @@ namespace _2LR.Controllers
             if (id != null)
             {
                 var product = new Product { Id = id.Value };
-                dbContext.Entry(product).State = EntityState.Deleted;
-                await dbContext.SaveChangesAsync();
+                _db.Entry(product).State = EntityState.Deleted;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return NotFound();
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)
             {
-                var product = await dbContext.Products.FirstOrDefaultAsync(p=>p.Id == id);
+                var product = await _db.Products.FirstOrDefaultAsync(p=>p.Id == id);
                 if (product != null) return View(product);
             }
             return NotFound();
@@ -72,16 +75,17 @@ namespace _2LR.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Product product)
         {
-            dbContext.Products.Update(product);
-            await dbContext.SaveChangesAsync();
+            _db.Products.Update(product);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult Read(int? id)
         {
             if (id != null)
             {
-                var product = dbContext.Products.FirstOrDefault(p=>p.Id == id);
+                var product = _db.Products.FirstOrDefault(p=>p.Id == id);
                 if(product != null) return View(product);
             }
             return NotFound();

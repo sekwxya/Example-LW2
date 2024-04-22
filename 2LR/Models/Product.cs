@@ -4,6 +4,7 @@ namespace _2LR.Models
 {
     public class Product
     {
+        [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Введите бренд")]
