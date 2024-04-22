@@ -12,7 +12,7 @@ using _2LR.Data;
 namespace _2LR.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240422203001_init")]
+    [Migration("20240422224557_init")]
     partial class init
     {
         /// <inheritdoc />
