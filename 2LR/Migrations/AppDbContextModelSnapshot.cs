@@ -63,7 +63,7 @@ namespace _2LR.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("_2LR.Models.User", b =>

@@ -12,8 +12,8 @@ using _2LR.Data;
 namespace _2LR.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240422173741_User")]
-    partial class User
+    [Migration("20240422203001_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,7 +66,7 @@ namespace _2LR.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("_2LR.Models.User", b =>
