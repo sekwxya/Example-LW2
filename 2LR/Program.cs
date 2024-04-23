@@ -1,4 +1,5 @@
 using _2LR.Data;
+using _2LR.Policies;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = new PathString("/Account/Login");
         options.AccessDeniedPath = new PathString("/Account/Login");
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.Requirements.Add(new AdminRequirement()));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

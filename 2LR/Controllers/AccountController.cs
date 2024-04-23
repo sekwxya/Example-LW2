@@ -78,7 +78,6 @@ namespace _2LR.Controllers
                         var claims = Authenticate(user);
                         HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claims));
                         return RedirectToAction("Index", "Product");
-
                     }
 
                 }
@@ -91,17 +90,16 @@ namespace _2LR.Controllers
 
             return View(model);
         }
+
         [Authorize]
         public IActionResult LogOut()
         {
-
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Product");
         }
 
         private ClaimsIdentity Authenticate(User account)
         {
-
             var claims = new List<Claim>()
         {
             new Claim(ClaimsIdentity.DefaultNameClaimType, account.Login),

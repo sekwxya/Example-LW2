@@ -17,6 +17,7 @@ namespace _2LR.Controllers
             _db = db;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View(_db.Products.ToList());
@@ -49,7 +50,7 @@ namespace _2LR.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int? id) 
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id != null)
             {
