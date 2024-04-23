@@ -45,18 +45,23 @@ namespace _2LR.Controllers
             dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(int? id) 
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id != null)
             {
+                var product = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+                if (product != null) return View(product);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(int? id) 
+        {
                 var product = new Product { Id = id.Value };
                 dbContext.Entry(product).State = EntityState.Deleted;
                 await dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
-            }
-            return NotFound();
         }
 
         public async Task<IActionResult> Edit(int? id)
